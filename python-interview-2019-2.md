@@ -10,7 +10,9 @@
    print(len({x for x in 'hello world' if x not in 'abcdefg'}))
    ```
 
-   答案：
+   答案：[(a,1),(b,2),(c,3),(d,4)]
+   
+   2
 
    ```
    
@@ -26,9 +28,11 @@
    ```
 
    答案：
+   
+   
 
    ```
-   
+   42
    ```
 
 3. 有一个通过网络获取数据的Python函数（可能会因为网络或其他原因出现异常），写一个装饰器让这个函数在出现异常时可以重新执行，但尝试重新执行的次数不得超过指定的最大次数。
@@ -36,6 +40,15 @@
    答案：
 
    ```Python
+   def god():
+      def set(*args,**kwargs):
+         try:
+            func()
+         except:
+            for i in range(4):
+               if func():
+                  break
+       return set
    
    ```
 
@@ -54,10 +67,13 @@
        'SYMC': 21.29
    }
    ```
-
+   
+   
    答案：
 
    ```Python
+   print(sorted(zip(prices.values(),prices.keys()))[-1][1])
+   print([{i[1]:i[0]} for i in sorted(zip(prices.values(),prices.keys())) if i[0] >100])
    
    ```
 
@@ -102,6 +118,19 @@
     答案：
 
     ```Python
+    results = []
+    def f():
+      results.append(sum(i,os.gettid() for i in range(1,101)))
+    
+    def main():
+      threads = [threading.Thread(target = f)for _ in range(5)]
+      for thread in threads:
+         thread.start()
+         print(os.gettid())
+      for thread in threads:
+         thread.join()
+      print('results')
+      
     
     ```
 
@@ -110,6 +139,12 @@
     答案：
 
     ```
+    一、垃圾回收：从经过引用计数器机制后还没有被释放掉内存的对象中，找到循环引用对象，并释放掉其内存二、引用计数：Python采用了类似Windows内核对象一样的方式来对内存进行管理。每一个对象，都维护这一个对指向该对对象的引用的计数。 三、内存池机制python又分为大内存和小内存。大小以256字节为界限，对于大内存使用Malloc进行分配，而对于小内存则使用内存池进行分配。
+    
+    
+    
+    
+    
     
     ```
 
@@ -138,6 +173,8 @@
 
   ```SQL
   
+  
+  
   ```
 
 11. 列举出你知道的HTTP请求头选项并说明其作用。
@@ -145,6 +182,9 @@
     答案：
 
     ```
+    user-agent
+    proxy
+    
     
     ```
 
@@ -161,7 +201,7 @@
     答案：
 
     ```
-    
+    发送请求-nginx接受请求-apche接受请求-返回给页面
     ```
 
 14. 请阐述HTTPS的工作原理，并说明该协议与HTTP之间的区别。
@@ -169,7 +209,7 @@
     答案：
 
     ```
-    
+    在http上加入了ssl安全协议
     ```
 
 15. 简述如何检查数据库是不是系统的性能瓶颈以及你在工作中是如何优化数据库操作性能的。
